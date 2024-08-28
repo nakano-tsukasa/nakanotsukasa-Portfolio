@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}input summary{% endblock %}
+
+
+{% block content %}
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-4">
+            <form id="loginForm">
+                <h2 class="text-center">Sign in</h2>
+                <div class="mb-3">
+                    <label for="signinEmail" class="form-label" name="signinEmail">email</label>
+                    <input type="text" name="signinEmail" id="signinEmail" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="signinPassword" class="form-label" name="signinPassword">password</label>
+                    <input type="password" name="signinPassword" id="signinPassword" class="form-control">
+                </div>
+                <button id="send" class="btn btn-primary w-100">send</button>
+            </form>
+        </div>
+    </div>
+</div>  
+{% endblock %}
+
+{% block script %}
+{% endblock %}

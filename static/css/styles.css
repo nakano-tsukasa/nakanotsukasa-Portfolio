@@ -1,0 +1,91 @@
+/* headerを常に画面の最下部に表示する */
+
+.wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.content {
+    flex: 1;
+}
+footer {
+    background: #f1f1f1;
+    text-align: center;
+    padding: 10px 0;
+}
+
+/* headerを上部に表示 */
+header {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    background: #f1f1f1;
+    text-align: center;
+    padding: 10px 0;
+}
+
+/* index.html */
+/* - header */
+.header-content {
+    flex: 1;
+    text-align: center;
+}
+
+.certification {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    gap: 20px;
+}
+
+.certification a,
+.certification-min a {
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 16px;
+    background-color: #555;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+.certification a:hover {
+    background-color: #777;
+}
+
+/* - .signin  */
+#loginForm {
+    display: flex;
+    flex-direction: column;
+}
+
+/* - .video-container */
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9アスペクト比（高さ / 幅 × 100） */
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+}
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.certification-min {
+    display: none;
+}
+
+@media (max-width: 768px) {
+        .certification {
+            display: none;
+            position: static;
+        }
+
+        .certification-min {
+            display: block;
+        }
+}

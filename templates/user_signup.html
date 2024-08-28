@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}User Registration{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <!-- needs-validation:requiredに対応 -->
+        <!-- novalidateでブラウザ固有のエラー処理を無効化 -->
+        <form class="needs-validation" action="{{ url_for('auth.submitinfo') }}" method="POST" novalidate>
+        <div class="mb-3">
+            <label for="InputName" class="form-label">User Name</label>
+            <!-- form-controlでエラー時の処理 -->
+            <!-- aria-describedlyで入力内容の説明 -->
+            <input type="name" name="InputName" class="form-control" id="InputName" aria-describedby="namelHelp" required>
+            <div id="namelHelp" class="form-text">Please use no more than 32 characters.</div>
+            <div class="valid-feedback">
+            Looks good!
+            </div>
+            <div class="invalid-feedback">
+            Please enter your name.
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="InputEmail" class="form-label">Email address</label>
+            <input type="email" name="InputEmail" class="form-control" id="InputEmail" aria-describedby="emailHelp" required>
+            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+            <div class="valid-feedback">
+            Looks good!
+            </div>
+            <div class="invalid-feedback">
+            Please enter your email address.
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="InputPassword" class="form-label">Password</label>
+            <input type="password" name="InputPassword" class="form-control" id="InputPassword" required>
+            <div class="valid-feedback">
+            Looks good!
+            </div>
+            <div class="invalid-feedback">
+            Please enter a new password.
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="InputConfirmPassword" class="form-label">Comfirm Password</label>
+            <input type="password" class="form-control" id="InputConfirmPassword" required>
+            <div class="invalid-feedback">
+            Confirmation password does not match.
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <p class="form-error" id="formError"></p>
+        </form>
+  </div>
+{% endblock %}
+
+{% block script %}
+    <script src="../static/js/user-signup.js"></script>
+{% endblock %}

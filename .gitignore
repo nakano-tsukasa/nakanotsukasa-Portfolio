@@ -1,0 +1,5 @@
+# Python virtual environment
+summarize/
+
+# Byte-compoled / optimized / DLL files
+__pycache__/
