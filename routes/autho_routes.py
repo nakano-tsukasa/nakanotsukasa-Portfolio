@@ -28,10 +28,10 @@ def submitinfo():
     db.session.commit()#セッション内の変更がデータベースに永続的に保存される。
 
     token = generate_verification_token(email)
-    verification_url = url_for('verify_email', token=token, _external=True)
+    verification_url = url_for('auth.verify_email', token=token, _external=True)
     send_verification_email(email,verification_url)
 
-    return redirect(url_for('confirmation_page'))
+    return redirect(url_for('main.confirmation_page'))
 
 
 #ユーザー認証完了ページ

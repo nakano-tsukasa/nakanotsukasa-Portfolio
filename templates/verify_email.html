@@ -1,1 +1,11 @@
-認証しました！
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container mt-5">
+        {% if message %}
+            <div class="alert {{ 'alert-success' if 'success' in message.lower() else 'alert-danger' }}" role="alert">
+                {{ message }}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
