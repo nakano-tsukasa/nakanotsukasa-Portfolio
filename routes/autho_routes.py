@@ -1,5 +1,5 @@
-from flask import Blueprint, render_template, request, redirect, url_for
-from werkzeug.security import generate_password_hash
+from flask import Blueprint, render_template, request, redirect, url_for, flash
+from werkzeug.security import generate_password_hash, check_password_hash
 from models import User_profiles, db
 from utils.token_utils import generate_verification_token, verify_verification_token
 from utils.email_utils import  send_verification_email
@@ -48,3 +48,17 @@ def verify_email(token):
             return render_template('verify_email.html', message="Invalid verification token.")
     except Exception as e:
         return render_template('verify_email.html', message=f"An error occurred: {e}")
+    
+#ユーザーサインイン処理
+@auth_bp.route('/signin_post', methods=['POST'])
+def signin_post():
+    email = request.form.get('signinEmail')
+    password = request.form.get('signinPassword')
+
+    user = User_profiles.query.filter_by(email=email).first()#emailカラムが一致する行を取得する
+
+    if user and check_password_hash(user.password_hash, password):
+        return redirect(url_for('main.account'))
+    else:
+        flash('Invalid email or password.', 'danger')
+        return redirect(url_for('main.user_signin'))

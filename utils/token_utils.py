@@ -6,7 +6,7 @@ import os#.envファイルからos.getenvで環境変数を取得する。osは�
 
 SECRET_KEY = os.getenv('SECRET_KEY')#この秘密鍵はJWTの署名に使われる。
 
-#--------------------メールからトークンを生成する--------------------
+#--------------------入力されたメールアドレスからトークンをエンコードする--------------------
 
 def generate_verification_token(email):
     payload = {#JSONのペイロード（データ部分）を定義する。ユーザーのメールアドレスを含むJWTを生成する。
@@ -15,7 +15,7 @@ def generate_verification_token(email):
     }
     return jwt.encode(payload, SECRET_KEY, algorithm='HS256')#ペイロードを指定した秘密鍵でHS256アルゴリズムを用いて署名し、JWTを生成する。
 
-#----------------------------------------
+#--------------------認証リンクに含まれるトークンをデコードする--------------------
 
 def verify_verification_token(token):
     try:

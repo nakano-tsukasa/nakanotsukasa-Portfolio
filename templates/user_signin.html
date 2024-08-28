@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 {% extends 'base.html' %}
 
 {% block title %}input summary{% endblock %}
@@ -7,7 +8,17 @@
 <div class="container mt-5 mb-5">
     <div class="row justify-content-center">
         <div class="col-md-6 col-lg-4">
-            <form id="loginForm">
+            <!-- POST内容が間違っていた場合、messageとcategoryの値が返される。categoryの値でalert-dangerなどのクラスを追加する -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            {% endwith %}
+            <form id="loginForm" method="POST" action="{{url_for('auth.signin_post')}}">
                 <h2 class="text-center">Sign in</h2>
                 <div class="mb-3">
                     <label for="signinEmail" class="form-label" name="signinEmail">email</label>

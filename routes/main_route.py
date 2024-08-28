@@ -7,7 +7,7 @@ def index():
     return render_template('index.html')
 
 #ユーザーのサインイン用ページ
-@main_bp.route('/user_signin')
+@main_bp.route('/user_signin' ,methods=['GET','POST'])
 def user_signin():
     return render_template('user_signin.html')
 
