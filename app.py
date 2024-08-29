@@ -9,7 +9,6 @@ from models import User, User_profiles
 
 from routes.autho_routes import auth_bp
 from routes.main_route import main_bp
-from routes.account_routes import account_bp
 
 #====================Flask app設定と初期化、データベース接続の初期化====================
 
@@ -32,9 +31,9 @@ login_manager.login_view = 'main.user_signin'# 未ログイン時のリダイレ
 
 @login_manager.user_loader# ユーザーの読み込み
 def load_user(user_id):
-    user_data = User_profiles.query.get(user_id)# データベースからユーザーを取得する
+    user_data = User_profiles.query.get(user_id)# データベースからプライマリーキーを検索してユーザーを取得する
     if user_data:
-        return User(user_id=user_data.id, email=user_data.email)
+        return User(id=user_data.id, email=user_data.email)
     return None
 
 #====================Blueprint設定====================

@@ -40,7 +40,7 @@ header {
     gap: 20px;
 }
 
-.certification a,
+/* .certification a,　→btn btn-primary btn-lgクラスで代用
 .certification-min a {
     color: #fff;
     text-decoration: none;
@@ -51,7 +51,7 @@ header {
 }
 .certification a:hover {
     background-color: #777;
-}
+} */
 
 /* - .signin  */
 #loginForm {

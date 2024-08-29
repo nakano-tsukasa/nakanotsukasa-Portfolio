@@ -3,9 +3,17 @@
 {% block content %}
     <div class="container mt-5">
         {% if message %}
-            <div class="alert {{ 'alert-success' if 'success' in message.lower() else 'alert-danger' }}" role="alert">
+        <div class="row g-3">
+            <div class="col-12 alert {{ 'alert-success' if 'success' in message.lower() else 'alert-danger' }}" role="alert">
                 {{ message }}
             </div>
+            <div class="col-12">
+                <div class="text-center">
+                    <p>Please sign in by your email and password.</p>
+                    <a class="btn btn-primary btn-lg" href="{{ url_for('main.user_signin') }}">Sign in</a>
+                </div>
+            </div>
+        </div>
         {% endif %}
     </div>
 {% endblock %}
