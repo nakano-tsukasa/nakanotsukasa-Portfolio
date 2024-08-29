@@ -5,7 +5,7 @@ from email.mime.text import MIMEText
 import os
 from dotenv import load_dotenv
 
-#--------------------f1:認証メール送信--------------------
+#--------------------認証メール送信--------------------
 
 #Gmailで認証メールを送信する
 def send_verification_email(user_email, verification_link):

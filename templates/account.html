@@ -4,6 +4,9 @@
 
 <div class="container">
     <div class="row g-3 mb-3 mt-3"> <!-- グリッド間隔を3に設定 -->
+        <div class="col-md-6"><button class="btn btn-dark btn-lg">Read A New Book</button></div>
+    </div>
+    <div class="row g-3 mb-3 mt-3"> <!-- グリッド間隔を3に設定 -->
         <div class="col-md-6">
             <div class="border border-primary rounded shadow p-3">
                 <h4>Account Management</h4>
@@ -14,10 +17,10 @@
                     <div class="col-md-10">
                         <dl>
                             <dt>Name:</dt>
-                            <dd id="name">John Doe</dd>
+                            <dd id="name">{{ current_user.name }}</dd>
                     
                             <dt>Email:</dt>
-                            <dd id="email">john.doe@example.com</dd>
+                            <dd id="email">{{ current_user.email }}</dd>
                     
                             <dt>Password:</dt>
                             <dd id="password">******</dd>

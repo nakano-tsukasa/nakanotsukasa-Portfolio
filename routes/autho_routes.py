@@ -1,12 +1,27 @@
+#====================パッケージ====================
+
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from werkzeug.security import generate_password_hash, check_password_hash
 from models import User_profiles, db
 from utils.token_utils import generate_verification_token, verify_verification_token
 from utils.email_utils import  send_verification_email
 
+from flask_login import login_user, logout_user
+
+from models import User
+
+#====================Blueprint設定====================
+
 auth_bp = Blueprint('auth', __name__)
 
-#ユーザー情報送信ポイント
+#====================サインアップ用ルート====================
+
+# ユーザー情報取得
+# パスワードをハッシュ化
+# 重複チェック
+# 新規ユーザーの作成
+# メール確認トークンの生成、メール送信
+
 @auth_bp.route('/submitinfo', methods=['POST'])
 def submitinfo():
     name = request.form['InputName']#formのnameを指定し値を取得する
@@ -33,8 +48,11 @@ def submitinfo():
 
     return redirect(url_for('main.confirmation_page'))
 
+#====================メール確認用ルート====================
 
-#ユーザー認証完了ページ
+# トークンの検証
+# 結果の表示
+
 @auth_bp.route('/verify_email/<token>')
 def verify_email(token):
     try:
@@ -48,8 +66,13 @@ def verify_email(token):
             return render_template('verify_email.html', message="Invalid verification token.")
     except Exception as e:
         return render_template('verify_email.html', message=f"An error occurred: {e}")
-    
-#ユーザーサインイン処理
+
+#====================サインイン用ルート====================
+
+# ユーザー情報取得
+# パスワードの一致を確認
+# login_user関数で、セッションにユーザー情報を保存
+
 @auth_bp.route('/signin_post', methods=['POST'])
 def signin_post():
     email = request.form.get('signinEmail')
@@ -58,7 +81,17 @@ def signin_post():
     user = User_profiles.query.filter_by(email=email).first()#emailカラムが一致する行を取得する
 
     if user and check_password_hash(user.password_hash, password):
+        login_user(User(user.id, user.email))# ユーザーのIDがセッションに保存され、アプリケーション全体でユーザーの状態を認識できるようになる
         return redirect(url_for('main.account'))
     else:
         flash('Invalid email or password.', 'danger')
         return redirect(url_for('main.user_signin'))
+    
+#====================サインアウト用ルート====================
+
+# logout_user関数を使って、ログアウト、ホームをリダイレクト。
+
+@auth_bp.route('/signout')
+def signout():
+    logout_user()
+    return redirect(url_for('main.index'))

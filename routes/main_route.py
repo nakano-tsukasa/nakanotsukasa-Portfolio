@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template
+from flask_login import current_user, login_required
 
 main_bp = Blueprint('main', __name__)# Blueprint名、呼出しはmain.indexなどとする。Blueprint名.関数名
 
@@ -23,5 +24,6 @@ def confirmation_page():
 
 #アカウントページ
 @main_bp.route('/account')
+@login_required
 def account():
     return render_template('account.html')
