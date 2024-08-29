@@ -24,7 +24,7 @@ header {
     padding: 10px 0;
 }
 
-/* index.html */
+/* index.html ------------------------------------------- */
 /* - header */
 .header-content {
     flex: 1;
@@ -88,4 +88,14 @@ header {
         .certification-min {
             display: block;
         }
+}
+
+/* account.html ------------------------------------------- */
+
+.accountimg {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    padding: 0;
 }
