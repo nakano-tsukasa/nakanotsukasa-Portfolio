@@ -17,8 +17,8 @@ class User_profiles(db.Model):
     name = db.Column(db.String(255), nullable=False)
     email = db.Column(db.String(255), unique=True, nullable=False)
     password_hash = db.Column(db.String(255), nullable=False)
-    books = db.relationship('Books', backref='user', lazy=True)
-    summaries = db.relationship('Summaries', backref='user', lazy=True)
+    books = db.relationship('Books', back_populates='owner', lazy=True)
+    summaries = db.relationship('Summaries', back_populates='author', lazy=True)
 
 class Books(db.Model):
     __tablename__ = 'books'
@@ -27,8 +27,8 @@ class Books(db.Model):
     book_name = db.Column(db.String(255), nullable=False)
     author = db.Column(db.String(255), nullable=True)
     published_date = db.Column(db.Date, nullable=True)
-    user = db.relationship('User_profiles', backref=db.backref('books', lazy=True))
-    summaries = db.relationship('Summaries', backref='book', lazy=True)
+    owner = db.relationship('User_profiles', back_populates='books', lazy=True)
+    book_summaries = db.relationship('Summaries', back_populates='book_summary', lazy=True)
 
 class Summaries(db.Model):
     __tablename__='summaries'
@@ -38,8 +38,8 @@ class Summaries(db.Model):
     summary_text = db.Column(db.Text, nullable=False)
     created_at = db.Column(db.DateTime, default=db.func.current_timestamp(), nullable=False)
     updated_at = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp(), nullable=False)
-    user = db.relationship('User_profiles', backref=db.backref('summaries',  lazy=True))
-    book = db.relationship('Books', backref=db.backref('summaries', lazy=True))
+    author = db.relationship('User_profiles', back_populates='summaries',  lazy=True)
+    book_summary = db.relationship('Books', back_populates='book_summaries', lazy=True)
 
 #====================Flask-Loginの設定====================
 
