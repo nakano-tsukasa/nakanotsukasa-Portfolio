@@ -21,6 +21,7 @@ class User_profiles(db.Model):
 #====================Flask-Loginの設定====================
 
 class User(UserMixin):# UserMixinクラスの継承。is_authenticated, is_active, is_anonymous, get_id()などのメソッドやプロパティを持つ
-    def __init__(self, id, email):# Userクラスのコンストラクタ__init__メソッド
+    def __init__(self, id, name, email):# Userクラスのコンストラクタ__init__メソッド
         self.id = id# Flask-LoginはこのIDを使ってユーザーを識別する。
+        self.name = name
         self.email = email

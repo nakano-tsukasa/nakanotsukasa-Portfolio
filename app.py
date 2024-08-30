@@ -33,7 +33,7 @@ login_manager.login_view = 'main.user_signin'# 未ログイン時のリダイレ
 def load_user(user_id):
     user_data = User_profiles.query.get(user_id)# データベースからプライマリーキーを検索してユーザーを取得する
     if user_data:
-        return User(id=user_data.id, email=user_data.email)
+        return User(id=user_data.id, name=user_data.name, email=user_data.email)
     return None
 
 #====================Blueprint設定====================

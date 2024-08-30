@@ -81,7 +81,7 @@ def signin_post():
     user = User_profiles.query.filter_by(email=email).first()#emailカラムが一致する行を取得する
 
     if user and check_password_hash(user.password_hash, password):
-        login_user(User(user.id, user.email))# ユーザーのIDがセッションに保存され、アプリケーション全体でユーザーの状態を認識できるようになる
+        login_user(User(user.id, user.name, user.email))# ユーザーのIDがセッションに保存され、アプリケーション全体でユーザーの状態を認識できるようになる
         return redirect(url_for('main.account'))
     else:
         flash('Invalid email or password.', 'danger')
