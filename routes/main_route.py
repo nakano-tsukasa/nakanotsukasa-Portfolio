@@ -27,3 +27,8 @@ def confirmation_page():
 @login_required
 def account():
     return render_template('account.html')
+
+@main_bp.route('/summarizer')
+@login_required
+def summarizer():
+    return render_template('summarizer.html')

@@ -99,3 +99,10 @@ header {
     object-fit: cover;
     padding: 0;
 }
+
+/* summarizer.html ------------------------------------------- */
+
+.new-summary-area {
+        height: 150px; /* 4行分の高さを設定（1行あたり約37.5pxとして計算） */
+        resize: vertical; /* 縦にリサイズできるようにする（オプション） */
+}

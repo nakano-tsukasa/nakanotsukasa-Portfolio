@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-12 border border-primary p-3 mb-4">
+                <h2>Summary of previous paragraphs</h2>
+                <div class="border p-2">
+                    <p>ここにユーザーId、本IDから最新の要約を取得し表示する</p>
+                </div>
+            </div>
+            <div class="col-12 mx-auto border border-primary p-3">
+                <h2 class="col-12">Latest Summary</h2>
+                <form action="#######" method="POST" class="row g-3 p-2">
+                    <textarea class="col-12 border form-control new-summary-area" placeholder="Enter your summary here..." type="textarea" name="newSummary"></textarea>
+                    <button class="col-12 btn btn-primary">Create a new summary</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
