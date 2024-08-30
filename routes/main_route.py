@@ -32,3 +32,8 @@ def account():
 @login_required
 def summarizer():
     return render_template('summarizer.html')
+
+@main_bp.route('/book_list')
+@login_required
+def book_list():
+    return render_template('book_list.html')
