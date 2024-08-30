@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <form class="needs-validation mt-5" action="{{url_for('book_register.register')}}" method="POST" novalidate>
+        <div class="m-4">
+            <label for="bookTitle" class="form-label"><span class="badge bg-primary">BOOK TITLE</span></label>
+            <!-- form-controlでエラー時の処理 -->
+            <!-- aria-describedlyで入力内容の説明 -->
+            <input type="text" name="bookTitle" class="form-control" id="bookTitle" aria-describedby="titleHelp" placeholder="Dreams and Destinies" required>
+            <div id="titleHelp" class="form-text">Please enter the title of the book</div>
+            <div class="valid-feedback">
+            Looks good!
+            </div>
+            <div class="invalid-feedback">
+            Required.
+            </div>
+        </div>
+        <div class="m-4">
+            <label for="author" class="form-label"><span class="badge bg-primary">AUTHOR (Not required.)</span></label>
+            <!-- form-controlでエラー時の処理 -->
+            <!-- aria-describedlyで入力内容の説明 -->
+            <input type="text" name="author" class="form-control" id="author" aria-describedby="authorHelp" placeholder="Emily Grace Johnson">
+            <div id="authorHelp" class="form-text">Please enter the author's name.(Not required.)</div>
+        </div>
+        <div class="m-4">
+            <label for="publishedDate" class="form-label"><span class="badge bg-primary">PUBLISHED DATE (Not required.)</span></label>
+            <!-- form-controlでエラー時の処理 -->
+            <!-- aria-describedlyで入力内容の説明 -->
+            <input type="date" name="publishedDate" class="form-control" id="publishedDate" aria-describedby="publishedDateHelp">
+            <div id="publishedDateHelp" class="form-text">Please enter the publication date of the book.(Not required.)</div>
+        </div>
+        <div class="m-4 text-center">
+            <button type="submit" class="btn btn-primary btn-lg">
+                Submit
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

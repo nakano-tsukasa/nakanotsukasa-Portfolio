@@ -1,40 +1,41 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container">
-    <form class="needs-validation mt-5" action="" method="POST" novalidate>
-        <div class="m-4">
-            <label for="bookTitle" class="form-label"><span class="badge bg-primary">BOOK TITLE</span></label>
-            <!-- form-controlでエラー時の処理 -->
-            <!-- aria-describedlyで入力内容の説明 -->
-            <input type="text" name="bookTitle" class="form-control" id="bookTitle" aria-describedby="titleHelp" placeholder="Dreams and Destinies" required>
-            <div id="titleHelp" class="form-text">Please enter the title of the book</div>
-            <div class="valid-feedback">
-            Looks good!
-            </div>
-            <div class="invalid-feedback">
-            Required.
-            </div>
+<div class="container mt-4">
+    <h1>BOOK LIST</h1>
+    {% for book in books %}
+    <div class="row m-1 p-3 border boder-primary g-4">
+        <div class="d-flex justify-content-center align-items-center col-3" style="background-color: #ffffff;">
+            <img src="../static/img/sample.jpg" alt="" class="img-fluid" style="max-height: 100%; width: auto;">
         </div>
-        <div class="m-4">
-            <label for="author" class="form-label"><span class="badge bg-primary">AUTHOR (Not required.)</span></label>
-            <!-- form-controlでエラー時の処理 -->
-            <!-- aria-describedlyで入力内容の説明 -->
-            <input type="text" name="author" class="form-control" id="author" aria-describedby="authorHelp" placeholder="Emily Grace Johnson">
-            <div id="authorHelp" class="form-text">Please enter the author's name.(Not required.)</div>
-        </div>
-        <div class="m-4">
-            <label for="publishedDate" class="form-label"><span class="badge bg-primary">PUBLISHED DATE (Not required.)</span></label>
-            <!-- form-controlでエラー時の処理 -->
-            <!-- aria-describedlyで入力内容の説明 -->
-            <input type="date" name="publishedDate" class="form-control" id="publishedDate" aria-describedby="publishedDateHelp">
-            <div id="publishedDateHelp" class="form-text">Please enter the publication date of the book.(Not required.)</div>
-        </div>
-        <div class="m-4 text-center">
-            <button type="submit" class="btn btn-primary btn-lg">
-                Submit
-            </button>
-        </div>
-    </form>
+        <table class="col-7">
+            <tr>
+                <th>BOOK TITLE</th>
+                <td>{{book.book_name}}</td>
+            </tr>
+            <tr>
+                <th>AUTHOR</th>
+                <td>{{book.author}}</td>
+            </tr>
+            <tr>
+                <th>PUBLISHED DATE</th>
+                <td>{{book.published_date}}</td>
+            </tr>
+            <tr>
+                <th>PUBLISHED DATE</th>
+                <td>{{book.published_date}}</td>
+            </tr>
+            <tr>
+                <th>Summaries</th>
+                <td>ここに要約の総数を表示する</td>
+            </tr>
+        </table>
+        <div class="col-2">ここには本の進度をグラフで</div>
+    </div>
+    {% else %}
+    <tr>
+        <td colspan="3">No books found.</td>
+    </tr>
+    {% endfor %}
 </div>
 {% endblock %}

@@ -9,6 +9,7 @@ from models import User, User_profiles
 
 from routes.autho_routes import auth_bp
 from routes.main_route import main_bp
+from routes.book_register_routes import book_register_bp
 
 #====================Flask app設定と初期化、データベース接続の初期化====================
 
@@ -40,6 +41,7 @@ def load_user(user_id):
 
 app.register_blueprint(main_bp)
 app.register_blueprint(auth_bp, url_prefix='/auth')
+app.register_blueprint(book_register_bp, url_prefix='/book_register')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8888, debug=True)
