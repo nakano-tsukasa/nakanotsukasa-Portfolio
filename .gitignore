@@ -1,5 +1,6 @@
 # Python virtual environment
 summarize/
+venv/
 
 # Byte-compoled / optimized / DLL files
 __pycache__/
