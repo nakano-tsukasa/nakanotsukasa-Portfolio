@@ -19,6 +19,7 @@ class User_profiles(db.Model):
     password_hash = db.Column(db.String(255), nullable=False)
     books = db.relationship('Books', back_populates='owner', lazy=True)
     summaries = db.relationship('Summaries', back_populates='author', lazy=True)
+    derived_summary = db.relationship('Derived_summaries', back_populates='summary_owner', lazy=True)
 
 class Books(db.Model):
     __tablename__ = 'books'
@@ -29,6 +30,7 @@ class Books(db.Model):
     published_date = db.Column(db.Date, nullable=True)
     owner = db.relationship('User_profiles', back_populates='books', lazy=True)
     book_summaries = db.relationship('Summaries', back_populates='book_summary', lazy=True)
+    book_derived_summary = db.relationship('Derived_summaries', back_populates='book_info', lazy=True)
 
 class Summaries(db.Model):
     __tablename__='summaries'
@@ -40,6 +42,17 @@ class Summaries(db.Model):
     updated_at = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp(), nullable=False)
     author = db.relationship('User_profiles', back_populates='summaries',  lazy=True)
     book_summary = db.relationship('Books', back_populates='book_summaries', lazy=True)
+
+class Derived_summaries(db.Model):
+    __tablename__='derived_summaries'
+    d_summary_id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user_profiles.id'), nullable=False)
+    book_id = db.Column(db.Integer, db.ForeignKey('books.book_id'), nullable=False)
+    d_summary_text = db.Column(db.Text, nullable=False)
+    d_created_at = db.Column(db.DateTime, default=db.func.current_timestamp(), nullable=False)
+    d_updated_at = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp(), nullable=False)
+    summary_owner = db.relationship('User_profiles', back_populates='derived_summary',  lazy=True)
+    book_info = db.relationship('Books', back_populates='book_derived_summary', lazy=True)
 
 #====================Flask-Loginの設定====================
 

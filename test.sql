@@ -29,3 +29,18 @@ FOREIGN KEY (user_id) REFERENCES user_profiles(id),
 FOREIGN KEY (book_id) REFERENCES books(book_id)
 );
 
+2024/9/2に実行予定
+CREATE TABLE derived_summaries(
+    d_summary_id int PRIMARY KEY AUTO_INCREMENT,
+    user_id int not null,
+    book_id int not null,
+    d_summary_text TEXT NOT NULL,
+    d_created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    d_updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES user_profiles(id),
+    FOREIGN KEY (book_id) REFERENCES books(book_id)
+)
+
+ALTER TABLE derived_summaries CHANGE COLUMN old_name new_name VARCHAR(255);
+
+alter table derived_summaries modify d_summary_id int auto_increment;
