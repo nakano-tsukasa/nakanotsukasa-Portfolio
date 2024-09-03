@@ -25,7 +25,6 @@ def generate_summary_via_chatgpt(latest_d_summary_text,summary_text):
         )
         ai_generated_summary_pre = json.loads(responce.model_dump_json())
         ai_generated_summary = ai_generated_summary_pre['choices'][0]['message']['content']
-        print(ai_generated_summary)
         return ai_generated_summary
     except Exception as e:
         print(f"Unexpected Error: {e}")
