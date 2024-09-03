@@ -4,6 +4,10 @@ import openai
 def generate_summary_via_chatgpt(combined_texts):
     api_key = os.getenv("OPENAI_API_KEY")
 
+    if not api_key:
+        print("Error: OPENAI_API_KEY environment variable is not set.")
+        return None
+
     openai.api_key = api_key
 
     data = {
@@ -17,9 +21,11 @@ def generate_summary_via_chatgpt(combined_texts):
     }
 
     try:
-        response = openai.ChatCompletion.create(**data)
+        response = openai.Completion.create(**data)
         ai_generated_summary = response.choices[0].message['content'].strip()
         return ai_generated_summary
+    except openai.OpenAIError as e:
+        print(f"OpenAI API Error: {e}")
     except Exception as e:
-        print(f"Error: {e}")
+        print(f"Unexpected Error: {e}")
         return None

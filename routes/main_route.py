@@ -44,12 +44,12 @@ def account():
 @main_bp.route('/summarizer')
 @login_required
 def summarizer():
+    book_id = request.args.get('book_id')
+    book_name = request.args.get('book_name')
     # 最新の d_summary_text を取得
     latest_summary = Derived_summaries.query.filter_by(
         book_id=book_id, user_id=current_user.id
     ).order_by(Derived_summaries.d_created_at.desc()).first()
-    book_id = request.args.get('book_id')
-    book_name = request.args.get('book_name')
     return render_template('summarizer.html',
                            book_id=book_id,
                            book_name=book_name,

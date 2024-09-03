@@ -19,6 +19,7 @@
                 <h2 class="col-12">Latest Summary</h2>
                 <form action="{{url_for('summary.add_summary')}}" method="POST" class="row g-3 p-2">
                     <input type="hidden" name="book_id" value="{{book_id}}">
+                    <input type="hidden" name="book_name" value="{{book_name}}">
                     <textarea class="col-12 border form-control new-summary-area" placeholder="Enter your summary here..." type="textarea" name="newSummary"></textarea>
                     <button class="col-12 btn btn-primary">Create a new summary</button>
                 </form>

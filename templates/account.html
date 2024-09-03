@@ -13,7 +13,7 @@
                 </div>
                 <ul>
                     {% for book in books %}
-                    <li><a href="{{url_for('main.summarizer', book_id=book.id, book_name=book.book_name)}}">{{book.book_name}}</a></li>
+                    <li><a href="{{url_for('main.summarizer', book_id=book.book_id, book_name=book.book_name)}}">{{book.book_name}}</a></li>
                     {% endfor %}
                 </ul>
             </div>
