@@ -1,7 +1,8 @@
 #====================パッケージ====================
 
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request
 from flask_login import current_user, login_required
+from models import Books, Derived_summaries
 
 #====================Blueprint設定====================
 
@@ -36,13 +37,24 @@ def confirmation_page():
 @main_bp.route('/account')
 @login_required
 def account():
-    return render_template('account.html')
+    user_books = Books.query.filter_by(user_id=current_user.id).all()
+    return render_template('account.html', books=user_books)
 
 #要約ページ
 @main_bp.route('/summarizer')
 @login_required
 def summarizer():
-    return render_template('summarizer.html')
+    # 最新の d_summary_text を取得
+    latest_summary = Derived_summaries.query.filter_by(
+        book_id=book_id, user_id=current_user.id
+    ).order_by(Derived_summaries.d_created_at.desc()).first()
+    book_id = request.args.get('book_id')
+    book_name = request.args.get('book_name')
+    return render_template('summarizer.html',
+                           book_id=book_id,
+                           book_name=book_name,
+                           latest_summary=latest_summary
+    )
 
 #書籍登録ページ
 @main_bp.route('/registration')
@@ -54,5 +66,5 @@ def registration():
 @main_bp.route('/book_list')
 @login_required
 def book_list():
-    books = Books.query.all()
-    return render_template('book_list.html', books=books)
+    user_books = Books.query.filter_by(user_id=current_user.id).all()
+    return render_template('book_list.html', books=user_books)

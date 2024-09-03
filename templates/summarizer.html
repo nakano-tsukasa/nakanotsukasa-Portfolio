@@ -3,16 +3,22 @@
 
 {% block content %}
     <div class="container mt-5">
+        <h1>{{book_name}}</h1>
         <div class="row">
             <div class="col-12 border border-primary p-3 mb-4">
                 <h2>Summary of previous paragraphs</h2>
                 <div class="border p-2">
-                    <p>ここにユーザーId、本IDから最新の要約を取得し表示する</p>
+                    {% if latest_summary %}
+                    <p>{{latest_summary.d_summary_text}}</p>
+                    {% else %}
+                    <p>We have taken a new step forward! Register your new summary below.</p>
+                    {% endif %}
                 </div>
             </div>
             <div class="col-12 mx-auto border border-primary p-3">
                 <h2 class="col-12">Latest Summary</h2>
-                <form action="#######" method="POST" class="row g-3 p-2">
+                <form action="{{url_for('summary.add_summary')}}" method="POST" class="row g-3 p-2">
+                    <input type="hidden" name="book_id" value="{{book_id}}">
                     <textarea class="col-12 border form-control new-summary-area" placeholder="Enter your summary here..." type="textarea" name="newSummary"></textarea>
                     <button class="col-12 btn btn-primary">Create a new summary</button>
                 </form>

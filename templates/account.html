@@ -12,19 +12,9 @@
                     <div class="col-6"><a class="btn btn-dark btn-lg" href="{{url_for('main.registration')}}">Add a New Book</a></div>
                 </div>
                 <ul>
-                    <li>aaaaaaaaaaaaaa</li>
-                    <li>aaaaaaaaaaaaaa</li>
-                    <li>aaaaaaaaaaaaaa</li>
-                    <li>aaaaaaaaaaaaaa</li>
-                    <li>aaaaaaaaaaaaaa</li>
-                    <li>aaaaaaaaaaaaaa</li>
-                    <li>aaaaaaaaaaaaaa</li>
-                    <li>aaaaaaaaaaaaaa</li>
-                    <li>aaaaaaaaaaaaaa</li>
-                    <li>aaaaaaaaaaaaaa</li>
-                    <li>aaaaaaaaaaaaaa</li>
-                    <li>aaaaaaaaaaaaaa</li>
-                    <li>aaaaaaaaaaaaaa</li>
+                    {% for book in books %}
+                    <li><a href="{{url_for('main.summarizer', book_id=book.id, book_name=book.book_name)}}">{{book.book_name}}</a></li>
+                    {% endfor %}
                 </ul>
             </div>
         </div>

@@ -1,8 +1,12 @@
+<!DOCTYPE html>
 {% extends 'base.html' %}
 
 {% block content %}
 <div class="container mt-4">
     <h1>BOOK LIST</h1>
+    <div class="row g-3 mb-3 mt-3"> <!-- グリッド間隔を3に設定 -->
+        <div class="col-6"><a class="btn btn-dark btn-lg" href="{{url_for('main.registration')}}">Add a New Book</a></div>
+    </div>
     {% for book in books %}
     <div class="row m-1 p-3 border boder-primary g-4">
         <div class="d-flex justify-content-center align-items-center col-3" style="background-color: #ffffff;">
@@ -11,7 +15,7 @@
         <table class="col-7">
             <tr>
                 <th>BOOK TITLE</th>
-                <td>{{book.book_name}}</td>
+                <td><a href="{{url_for('main.summarizer', book_id=book.id, book_name=book.book_name), new}}">{{book.book_name}}</a></td>
             </tr>
             <tr>
                 <th>AUTHOR</th>
