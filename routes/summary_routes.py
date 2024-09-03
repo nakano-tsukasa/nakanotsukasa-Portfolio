@@ -39,8 +39,7 @@ def add_summary():
     print(latest_d_summary_text)
 
     if latest_d_summary_text:
-        combined_texts = f"1:{latest_d_summary_text}\n2:{summary_text}"
-        ai_generated_summary = generate_summary_via_chatgpt(combined_texts)
+        ai_generated_summary = generate_summary_via_chatgpt(latest_d_summary_text,summary_text)
     else:
         ai_generated_summary = summary_text
 
