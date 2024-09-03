@@ -36,8 +36,6 @@ def add_summary():
     ).order_by(Derived_summaries.d_created_at.desc()).first()
     latest_d_summary_text = latest_derived_summary.d_summary_text if latest_derived_summary else None
 
-    print(latest_d_summary_text)
-
     if latest_d_summary_text:
         ai_generated_summary = generate_summary_via_chatgpt(latest_d_summary_text,summary_text)
     else:
