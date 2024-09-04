@@ -1,4 +1,4 @@
-/* headerを常に画面の最下部に表示する */
+/* footerを常に画面の最下部に表示する */
 
 .wrapper {
     min-height: 100vh;
@@ -17,11 +17,29 @@ footer {
 /* headerを上部に表示 */
 header {
     position: relative;
-    display: flex;
-    justify-content: center;
     background: #f1f1f1;
     text-align: center;
     padding: 10px 0;
+}
+
+nav {
+    position: relative;
+}
+
+nav #home_btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex; /* Flexbox を使用して中央揃え */
+    justify-content: center; /* 水平方向の中央揃え */
+    align-items: center; /* 垂直方向の中央揃え */
+    height: 100%; /* aタグの高さをnavの高さに合わせる。absoluteに設定したので、親要素の高さが明示的でない場合aタグはつぶれる可能性がある。 */
+}
+
+nav #home_btn img {
+    height: 80%;
+    width: auto;
 }
 
 /* index.html ------------------------------------------- */

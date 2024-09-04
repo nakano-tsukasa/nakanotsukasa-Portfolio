@@ -3,8 +3,8 @@
 
 {% block content %}
 
-<div class="container">
-
+<div class="container-fluid">
+    <h1 class="my-2 text-center">{{ current_user.name }}'s Home</h1>
     <div class="row g-3 mb-3 mt-3"> <!-- グリッド間隔を3に設定 -->
         <div class="col-md-6">
             <div class="border border-primary rounded shadow p-3">
@@ -36,26 +36,8 @@
                     
                             <dt>Password:</dt>
                             <dd id="password">******</dd>
-                    
-                            <dt>Last 10 books</dt>
-                            <dd id="readinglist">
-                                <div class="row p-3">
-                                    <ul class="col-md-6 mb-0">
-                                        <li>aaaaaaa</li>
-                                        <li>aaaaaaa</li>
-                                        <li>aaaaaaa</li>
-                                        <li>aaaaaaa</li>
-                                        <li>aaaaaaa</li>
-                                    </ul>
-                                    <ul class="col-md-6 mb-0">
-                                        <li>aaaaaaa</li>
-                                        <li>aaaaaaa</li>
-                                        <li>aaaaaaa</li>
-                                        <li>aaaaaaa</li>
-                                        <li>aaaaaaa</li>
-                                    </ul>
-                                </div>
-                            </dd>
+
+                            <a href="###" class="btn btn-dark">Update</a>
                         </dl>
                     </div>
                 </div>              
