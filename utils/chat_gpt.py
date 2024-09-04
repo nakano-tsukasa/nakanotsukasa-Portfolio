@@ -1,11 +1,13 @@
 import os
 from openai import OpenAI
 import json
+from dotenv import load_dotenv
 
 def generate_summary_via_chatgpt(latest_d_summary_text,summary_text):
 
     user_message = f"Please summarize these two texts.Please answer in one sentence, no headings.:\n\nText 1:{latest_d_summary_text}\n\nText 2:{summary_text}"
 
+    load_dotenv()
     my_api_key = os.getenv("OPENAI_API_KEY")
     if not my_api_key:
         print("Error: OPENAI_API_KEY environment variable is not set.")
