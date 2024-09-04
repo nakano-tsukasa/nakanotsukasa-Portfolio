@@ -3,6 +3,7 @@
 from flask import Blueprint, render_template, request
 from flask_login import current_user, login_required
 from models import Books, Derived_summaries
+from utils.book_sort import book_list_sort
 
 #====================Blueprint設定====================
 
@@ -38,7 +39,8 @@ def confirmation_page():
 @login_required
 def account():
     user_books = Books.query.filter_by(user_id=current_user.id).all()
-    return render_template('account.html', books=user_books)
+    sorted_user_books = book_list_sort(user_books)
+    return render_template('account.html', books=sorted_user_books)
 
 #要約ページ
 @main_bp.route('/summarizer')

@@ -28,6 +28,8 @@ class Books(db.Model):
     book_name = db.Column(db.String(255), nullable=False)
     author = db.Column(db.String(255), nullable=True)
     published_date = db.Column(db.Date, nullable=True)
+    b_created_at = db.Column(db.DateTime, default=db.func.current_timestamp(), nullable=False)
+    b_updated_at = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp(), nullable=False)
     owner = db.relationship('User_profiles', back_populates='books', lazy=True)
     book_summaries = db.relationship('Summaries', back_populates='book_summary', lazy=True)
     book_derived_summary = db.relationship('Derived_summaries', back_populates='book_info', lazy=True)
