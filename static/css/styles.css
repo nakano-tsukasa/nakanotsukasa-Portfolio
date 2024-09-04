@@ -118,6 +118,10 @@ nav #home_btn img {
     padding: 0;
 }
 
+.custom_bg {
+    background-color: #e0f7fa; /* 薄い青色 */
+}
+
 /* summarizer.html ------------------------------------------- */
 
 .new-summary-area {

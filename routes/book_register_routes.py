@@ -12,9 +12,9 @@ book_register_bp = Blueprint('book_register', __name__)
 
 @book_register_bp.route('/', methods=['POST'])
 def register():
-    book_name = request.form['bookTitle']
-    author = request.form['author']
-    published_date = request.form['publishedDate']
+    book_name = request.form.get('bookTitle')
+    author = request.form.get('author') or None
+    published_date = request.form.get('publishedDate') or None
 
     user_id = current_user.id
 

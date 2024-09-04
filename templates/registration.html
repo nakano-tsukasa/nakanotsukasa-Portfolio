@@ -3,7 +3,7 @@
 
 {% block content %}
 <div class="container">
-    <form class="needs-validation mt-5" action="{{url_for('book_register.register')}}" method="POST" novalidate>
+    <form class="needs-validation mt-5" action="{{url_for('book_register.register')}}" method="POST" novalidate id="book_register_form">
         <div class="m-4">
             <label for="bookTitle" class="form-label"><span class="badge bg-primary">BOOK TITLE</span></label>
             <!-- form-controlでエラー時の処理 -->
@@ -38,4 +38,7 @@
         </div>
     </form>
 </div>
+{% endblock %}
+{% block script %}
+<script src="../static/js/book_regiser.js"></script>
 {% endblock %}

@@ -3,12 +3,12 @@
 
 {% block content %}
 
-<div class="container-fluid">
+<div class="container">
     <h1 class="my-2 text-center">{{ current_user.name }}'s Home</h1>
     <div class="row g-3 mb-3 mt-3"> <!-- グリッド間隔を3に設定 -->
         <div class="col-md-6">
             <div class="border border-primary rounded shadow p-3">
-                <h4>Book Management</h4>
+                <h4 class="custom_bg">Book Management</h4>
                 <h5>Books recently added summaries.</h5>
                 <ul>
                     {% for book in books[:10] %}
@@ -21,7 +21,7 @@
         </div>
         <div class="col-md-6">
             <div class="border border-primary rounded shadow p-3">
-                <h4>Account Management</h4>
+                <h4 class="custom_bg">Account Management</h4>
                 <div class="row g-2 mt-1"> <!-- 内部のグリッド間隔も調整 -->
                     <div class="col-2">
                         <img class="accountimg" src="../static/img/dog.jpg" alt="">
@@ -37,7 +37,7 @@
                             <dt>Password:</dt>
                             <dd id="password">******</dd>
 
-                            <a href="###" class="btn btn-dark">Update</a>
+                            <a href="###" class="btn btn-dark btn-lg">Update</a>
                         </dl>
                     </div>
                 </div>              

@@ -7,7 +7,7 @@
     <div class="container">
         <!-- needs-validation:requiredに対応 -->
         <!-- novalidateでブラウザ固有のエラー処理を無効化 -->
-        <form class="needs-validation" action="{{ url_for('auth.submitinfo') }}" method="POST" novalidate>
+        <form class="needs-validation" action="{{ url_for('auth.submitinfo') }}" method="POST" novalidate id="user_signup_form">
         <div class="mb-3">
             <label for="InputName" class="form-label">User Name</label>
             <!-- form-controlでエラー時の処理 -->
