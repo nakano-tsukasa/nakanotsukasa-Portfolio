@@ -15,7 +15,7 @@
         <table class="col-7">
             <tr>
                 <th>BOOK TITLE</th>
-                <td><a href="{{url_for('main.summarizer', book_id=book.id, book_name=book.book_name), new}}">{{book.book_name}}</a></td>
+                <td><a href="{{url_for('main.summarizer', book_id=book.id, book_name=book.book_name)}}">{{book.book_name}}</a></td>
             </tr>
             <tr>
                 <th>AUTHOR</th>
@@ -26,8 +26,8 @@
                 <td>{{book.published_date}}</td>
             </tr>
             <tr>
-                <th>PUBLISHED DATE</th>
-                <td>{{book.published_date}}</td>
+                <th>ADDED DATE</th>
+                <td>{{book.b_created_at}}</td>
             </tr>
             <tr>
                 <th>Summaries</th>
