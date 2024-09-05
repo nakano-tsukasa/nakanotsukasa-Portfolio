@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h1 class="mb-3 text-center">BOOK TITLE: {{book_name}}</h1>
+        <div class="row">
+            <div class="col-12 border border-primary p-3 mb-4">
+                <h2>Summary of previous paragraphs</h2>
+                <div class="border p-2">
+                    {% if summaries %}
+                    <p>{{summaries[0]}}</p>
+                    {% else %}
+                    <p>A summary has not been provided yet.</p>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-12 border border-primary p-3 mb-4">
+                <h2>Summary of previous paragraphs</h2>
+                <div class="border p-2">
+                    {% if summaries2 %}
+                    <p>{{summaries2[0]}}</p>
+                    {% else %}
+                    <p>Only one summary has been written.</p>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-12 border border-primary p-3 mb-4" id="lastSummary">
+                <h2>Last summary</h2>
+                <div class="border p-2">
+                    <p></p>
+                </div>
+            </div>
+            <button id="prev-btn">Previous</button>
+            <button id="next-btn">Next</button>
+        </div>
+    </div>
+{% endblock %}
