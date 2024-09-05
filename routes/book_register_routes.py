@@ -22,5 +22,4 @@ def register():
     db.session.add(new_book)
     db.session.commit()
 
-    flash('Book successfully registerd!')
     return redirect(url_for('main.book_list'))
