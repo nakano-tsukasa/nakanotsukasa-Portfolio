@@ -15,7 +15,7 @@
         <table class="col-7">
             <tr>
                 <th>BOOK TITLE</th>
-                <td><a href="{{url_for('main.summarizer', book_id=book.id, book_name=book.book_name)}}">{{book.book_name}}</a></td>
+                <td><a href="{{url_for('main.summarizer', book_id=book.book_id, book_name=book.book_name)}}">{{book.book_name}}</a></td>
             </tr>
             <tr>
                 <th>AUTHOR</th>
@@ -31,7 +31,7 @@
             </tr>
             <tr>
                 <th>Summaries</th>
-                <td>ここに要約の総数を表示する</td>
+                <td><a href="{{url_for('main.summaries_list', book_id=book.book_id)}}">show summaries history</a></td>
             </tr>
         </table>
         <div class="col-2">ここには本の進度をグラフで</div>

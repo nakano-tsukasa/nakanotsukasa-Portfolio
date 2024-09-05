@@ -28,7 +28,7 @@ nav {
 
 nav #home_btn {
     position: absolute;
-    top: 50%;
+    top: 27px;
     left: 50%;
     transform: translate(-50%, -50%);
     display: flex; /* Flexbox を使用して中央揃え */
@@ -38,7 +38,7 @@ nav #home_btn {
 }
 
 nav #home_btn img {
-    height: 80%;
+    height: 50px;
     width: auto;
 }
 

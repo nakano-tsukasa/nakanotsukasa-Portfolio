@@ -2,7 +2,7 @@
 
 from flask import Blueprint, render_template, request
 from flask_login import current_user, login_required
-from models import Books, Derived_summaries
+from models import Books, Derived_summaries, Summaries
 from utils.book_sort import book_list_sort
 
 #====================Blueprint設定====================
@@ -51,7 +51,7 @@ def summarizer():
     # 最新の d_summary_text を取得
     latest_summary = Derived_summaries.query.filter_by(
         book_id=book_id, user_id=current_user.id
-    ).order_by(Derived_summaries.d_created_at.desc()).first()
+    ).order_by(Derived_summaries.d_updated_at.desc()).first()
     return render_template('summarizer.html',
                            book_id=book_id,
                            book_name=book_name,
@@ -70,3 +70,23 @@ def registration():
 def book_list():
     user_books = Books.query.filter_by(user_id=current_user.id).all()
     return render_template('book_list.html', books=user_books)
+
+#要約表示リスト
+@main_bp.route('/summaries_list')
+@login_required
+def summaries_list():
+    book_id = request.args.get('book_id')
+    book = Books.query.filter_by(user_id=current_user.id, book_id=book_id).first()
+    summaries_pre = Summaries.query.filter_by(user_id=current_user.id,book_id=book_id ).all()
+    if summaries_pre:
+        summaries = [summary.summary_text for summary in summaries_pre[1:]]
+    else:
+        summaries = []
+    
+    summaries2_pre = Derived_summaries.query.filter_by(user_id=current_user.id,book_id=book_id ).all()
+    if summaries2_pre:
+        summaries2 = [d_summary.d_summary_text for d_summary in summaries2_pre]
+    else:
+        summaries2 = []
+
+    return render_template('summaries_list.html', summaries=summaries, summaries2 = summaries2, book=book)
