@@ -46,4 +46,4 @@ app.register_blueprint(book_register_bp, url_prefix='/book_register')
 app.register_blueprint(summary_bp, url_prefix='/summary')
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8888, debug=True)
+    app.run(host='0.0.0.0', port=8888, debug=False)
