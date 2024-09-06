@@ -37,7 +37,7 @@
     </div>
 {% endblock %}
 {% block script %}
-    <script src="../static/js/summary_list.js"></script>
+    <script src="{{ url_for('static', filename='js/summary_list.js') }}"></script>
     <script>
         // Convert Python lists to JSON using Jinja
         const summaries = {{ summaries|tojson }};
