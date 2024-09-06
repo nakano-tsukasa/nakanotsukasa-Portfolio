@@ -12,7 +12,11 @@ from routes.main_route import main_bp
 from routes.book_register_routes import book_register_bp
 from routes.summary_routes import summary_bp
 
+from dotenv import load_dotenv
+
 #====================Flask app設定と初期化、データベース接続の初期化====================
+
+load_dotenv()
 
 DBSERVER_URI = os.getenv('DBSERVER_URI')
 SECRET_KEY = os.getenv('SECRET_KEY')

@@ -3,6 +3,9 @@
 import jwt#JSON Web Token インストールはPyJWT
 import datetime
 import os#.envファイルからos.getenvで環境変数を取得する。osはファイルパスの操作もできる。
+from dotenv import load_dotenv
+
+load_dotenv()
 
 SECRET_KEY = os.getenv('SECRET_KEY')#この秘密鍵はJWTの署名に使われる。
 
