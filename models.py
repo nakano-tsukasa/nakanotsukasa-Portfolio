@@ -17,22 +17,34 @@ class User_profiles(db.Model):
     name = db.Column(db.String(255), nullable=False)
     email = db.Column(db.String(255), unique=True, nullable=False)
     password_hash = db.Column(db.String(255), nullable=False)
+    is_verified = db.Column(db.Boolean, default=False)
     books = db.relationship('Books', back_populates='owner', lazy=True)
     summaries = db.relationship('Summaries', back_populates='author', lazy=True)
     derived_summary = db.relationship('Derived_summaries', back_populates='summary_owner', lazy=True)
+    my_groups = db.relationship('Book_Groups', back_populates='group_owner', lazy=True)
 
 class Books(db.Model):
     __tablename__ = 'books'
     book_id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user_profiles.id'), nullable=False)
     book_name = db.Column(db.String(255), nullable=False)
+    g_id = db.Column(db.Integer, db.ForeignKey('book_groups.g_id'), nullable=False)
     author = db.Column(db.String(255), nullable=True)
-    published_date = db.Column(db.Date, nullable=True)
+    published_date = db.Column(db.Text, nullable=True)
     b_created_at = db.Column(db.DateTime, default=db.func.current_timestamp(), nullable=False)
     b_updated_at = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp(), nullable=False)
     owner = db.relationship('User_profiles', back_populates='books', lazy=True)
     book_summaries = db.relationship('Summaries', back_populates='book_summary', lazy=True)
     book_derived_summary = db.relationship('Derived_summaries', back_populates='book_info', lazy=True)
+    group = db.relationship('Book_Groups', back_populates='books_in_group', lazy=True)
+
+class Book_Groups(db.Model):
+    __tablename__='book_groups'
+    g_id = db.Column(db.Integer, primary_key=True)
+    g_name = db.Column(db.String(100), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user_profiles.id'), nullable=False)
+    group_owner = db.relationship('User_profiles', back_populates='my_groups', lazy=True)
+    books_in_group = db.relationship('Books', back_populates='group', lazy=True)
 
 class Summaries(db.Model):
     __tablename__='summaries'
@@ -59,7 +71,9 @@ class Derived_summaries(db.Model):
 #====================Flask-Loginの設定====================
 
 class User(UserMixin):# UserMixinクラスの継承。is_authenticated, is_active, is_anonymous, get_id()などのメソッドやプロパティを持つ
-    def __init__(self, id, name, email):# Userクラスのコンストラクタ__init__メソッド
+    def __init__(self, id, name):# Userクラスのコンストラクタ__init__メソッド
         self.id = id# Flask-LoginはこのIDを使ってユーザーを識別する。
         self.name = name
-        self.email = email
+    
+    def get_id(self):
+        return str(self.id)

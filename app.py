@@ -39,7 +39,7 @@ login_manager.login_view = 'main.user_signin'# 未ログイン時のリダイレ
 def load_user(user_id):
     user_data = User_profiles.query.get(user_id)# データベースからプライマリーキーを検索してユーザーを取得する
     if user_data:
-        return User(id=user_data.id, name=user_data.name, email=user_data.email)
+        return User(id=user_data.id, name=user_data.name)
     return None
 
 #====================Blueprint設定====================
@@ -50,4 +50,4 @@ app.register_blueprint(book_register_bp, url_prefix='/book_register')
 app.register_blueprint(summary_bp, url_prefix='/summary')
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8888, debug=False)
+    app.run(host='0.0.0.0', port=8888, debug=True)

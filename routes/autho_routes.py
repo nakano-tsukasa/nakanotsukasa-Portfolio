@@ -8,7 +8,7 @@ from utils.email_utils import  send_verification_email
 
 from flask_login import login_user, logout_user
 
-from models import User
+from models import User, Book_Groups
 
 #====================Blueprint設定====================
 
@@ -58,12 +58,19 @@ def verify_email(token):
     try:
         email = verify_verification_token(token)#email_utils.pyよりデコードしてemailを返す関数
         user = User_profiles.query.filter_by(email=email).first()#.query.filter_byでSQLインジェクションを回避する
-
         if user:
-            # アカウントの有効化などの処理
-            return render_template('verify_email.html', message="Email verified successfully!")
+            if not user.is_verified:# アカウントを有効化する
+                user.is_verified = True
+                db.session.commit()
+                new_group = Book_Groups(g_name='others', user_id=user.id)# 本のグループにothersを作成する
+                db.session.add(new_group)
+                db.session.commit()
+                message = "Email verified successfully! Please sign in below."
+            else:
+                message = "Account already verified."
         else:
-            return render_template('verify_email.html', message="Invalid verification token.")
+            message = "Invalid verification token."
+        return render_template('verify_email.html', message=message)
     except Exception as e:
         return render_template('verify_email.html', message=f"An error occurred: {e}")
 
@@ -81,8 +88,12 @@ def signin_post():
     user = User_profiles.query.filter_by(email=email).first()#emailカラムが一致する行を取得する
 
     if user and check_password_hash(user.password_hash, password):
-        login_user(User(user.id, user.name, user.email))# ユーザーのIDがセッションに保存され、アプリケーション全体でユーザーの状態を認識できるようになる
-        return redirect(url_for('main.account'))
+        if user.is_verified:
+            login_user(User(user.id, user.name))# ユーザーのIDがセッションに保存され、アプリケーション全体でユーザーの状態を認識できるようになる
+            return redirect(url_for('main.account'))
+        else:
+            flash('Your account is not verified. Please check your email for verification.', 'warning')
+            return redirect(url_for('main.user_signin'))
     else:
         flash('Invalid email or password.', 'danger')
         return redirect(url_for('main.user_signin'))

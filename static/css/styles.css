@@ -1,5 +1,5 @@
+/* base.html */
 /* footerを常に画面の最下部に表示する */
-
 .wrapper {
     min-height: 100vh;
     display: flex;
@@ -120,6 +120,18 @@ nav #home_btn img {
 
 .custom_bg {
     background-color: #e0f7fa; /* 薄い青色 */
+}
+
+.svgImg {
+    height: 50px;
+    width: auto;
+}
+
+.no-style {
+    margin: 0; /* pタグのマージンをリセット */
+    padding: 0; /* pタグのパディングをリセット */
+    color: inherit; /* テキストカラーを親要素から継承 */
+    text-decoration: none; /* テキストの下線を削除 */
 }
 
 /* summarizer.html ------------------------------------------- */

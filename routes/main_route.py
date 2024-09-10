@@ -2,7 +2,7 @@
 
 from flask import Blueprint, render_template, request
 from flask_login import current_user, login_required
-from models import Books, Derived_summaries, Summaries
+from models import Books, Derived_summaries, Summaries, Book_Groups
 from utils.book_sort import book_list_sort
 
 #====================Blueprint設定====================
@@ -38,9 +38,9 @@ def confirmation_page():
 @main_bp.route('/account')
 @login_required
 def account():
-    user_books = Books.query.filter_by(user_id=current_user.id).all()
-    sorted_user_books = book_list_sort(user_books)
-    return render_template('account.html', books=sorted_user_books)
+    books = Books.query.filter_by(user_id=current_user.id).all()
+    book_groups = Book_Groups.query.filter_by(user_id=current_user.id).all()
+    return render_template('account.html', book_groups=book_groups, books=books)
 
 #要約ページ
 @main_bp.route('/summarizer')
@@ -62,7 +62,8 @@ def summarizer():
 @main_bp.route('/registration')
 @login_required
 def registration():
-    return render_template('registration.html')
+    book_groups = Book_Groups.query.filter_by(user_id=current_user.id)
+    return render_template('registration.html',book_groups=book_groups)
 
 #書籍一覧ページ
 @main_bp.route('/book_list')

@@ -3,6 +3,7 @@
 
 {% block content %}
 <div class="container">
+    <h1 class="mt-4">ADD A NEW BOOK</h1>
     <form class="needs-validation mt-5" action="{{url_for('book_register.register')}}" method="POST" novalidate id="book_register_form">
         <div class="m-4">
             <label for="bookTitle" class="form-label"><span class="badge bg-primary">BOOK TITLE</span></label>
@@ -10,6 +11,23 @@
             <!-- aria-describedlyで入力内容の説明 -->
             <input type="text" name="bookTitle" class="form-control" id="bookTitle" aria-describedby="titleHelp" placeholder="Dreams and Destinies" required>
             <div id="titleHelp" class="form-text">Please enter the title of the book</div>
+            <div class="valid-feedback">
+            Looks good!
+            </div>
+            <div class="invalid-feedback">
+            Required.
+            </div>
+        </div>
+        <div class="m-4">
+            <label for="bookGroup" class="form-label"><span class="badge bg-primary">BOOK Group</span></label>
+            <select name="bookGroup" id="bookGroup" class="form-select" aria-describedby="groupHelp" required>
+                {% for book_group in book_groups %}
+                    <option value="{{book_group.g_id}}">{{book_group.g_name}}</option>
+                {% endfor %}
+            </select>
+            <div id="groupHelp" class="form-text">
+                Please select the group of the book.
+            </div>
             <div class="valid-feedback">
             Looks good!
             </div>
@@ -28,8 +46,8 @@
             <label for="publishedDate" class="form-label"><span class="badge bg-primary">PUBLISHED DATE (Not required.)</span></label>
             <!-- form-controlでエラー時の処理 -->
             <!-- aria-describedlyで入力内容の説明 -->
-            <input type="date" name="publishedDate" class="form-control" id="publishedDate" aria-describedby="publishedDateHelp">
-            <div id="publishedDateHelp" class="form-text">Please enter the publication date of the book.(Not required.)</div>
+            <input type="text" name="publishedDate" class="form-control" id="publishedDate" placeholder="YYYYMMDD" aria-describedby="publishedDateHelp">
+            <div id="publishedDateHelp" class="form-text">Format: YYYYMMDD. Please enter the publication date of the book.(Not required.)</div>
         </div>
         <div class="m-4 text-center">
             <button type="submit" class="btn btn-primary btn-lg">

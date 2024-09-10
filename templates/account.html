@@ -9,14 +9,44 @@
         <div class="col-md-6">
             <div class="border border-primary rounded shadow p-3">
                 <h4 class="custom_bg">Book Management</h4>
-                <h5>Books recently added summaries.</h5>
-                <ul>
-                    {% for book in books[:10] %}
-                    <li><a href="{{url_for('main.summarizer', book_id=book.book_id, book_name=book.book_name)}}">{{book.book_name}}</a></li>
-                    {% endfor %}
-                </ul>
-                <a class="btn btn-dark btn-lg" href="{{url_for('main.book_list')}}">Show All</a>
-                <a class="btn btn-dark btn-lg" href="{{url_for('main.registration')}}">Add a New Book</a>
+                <div class="d-flex mt-4">
+                    <a href="{{ url_for('main.registration') }}" class="mx-2 no-style">
+                        <p class="m-0">BOOK</p>
+                        <img class="svgImg" src="/static/img/square-plus-solid.svg" alt="Add a new book">
+                        
+                    </a>
+                    <a href="{{ url_for('main.book_list') }}" class="mx-2 no-style">
+                        <p class="m-0">GROUP</p>
+                        <img class="svgImg" src="/static/img/square-plus-solid.svg" alt="Add a new group">
+                        
+                    </a>
+                </div>
+                <div class="my-4">
+                    <label for="bookGroupSelect">Select Book Group</label>
+                    <select id="bookGroupSelect" class="form-control">
+                            <option value="">-- All books --</option>
+                        {% for book_group in book_groups %}
+                            <option value="{{ book_group.g_id }}">{{ book_group.g_name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="my-4">
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4" id="groupInfo">
+                        {% for book in books %}
+                        <div class="col md-4 mb-3">
+                            <a href="{{url_for('main.summarizer', book_id=book.book_id, book_name=book.book_name)}}">
+                                <div class="card">
+                                    <img src="/static/img/dog.jpg" alt="Book Cover" class="card-img-top">
+                                    <div class="card-body">
+                                        <p class="card-title">{{ book.book_name }}</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                
             </div>
         </div>
         <div class="col-md-6">
@@ -61,4 +91,9 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block script %}
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="/static/js/book_group.js"></script>
 {% endblock %}
