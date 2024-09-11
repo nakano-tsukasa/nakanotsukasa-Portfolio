@@ -13,13 +13,14 @@ $(document).ready(function(){
                     const content = '';
 
                     books.forEach(function(book) {
+                        const safeBookName = DOMPurify.sanitize(book.book_name);// XSS対策に、サニタイズを行う
                         content += `
                             <div class="col md-4">
-                                <a href="{{url_for('main.summarizer', book_id=${book.book_id}, book_name=${book.book_name})}}">
+                                <a href="{{url_for('main.summarizer', book_id=${book.book_id}, book_name=${safeBookName})}}">
                                     <div class="card">
                                         <img src="/static/img/dog.jpg" alt="Book Cover" class="card-img-top">
                                         <div class="card-body">
-                                            <h5 class="card-title">${book.book_name}</h5>
+                                            <h5 class="card-title">${safeBookName}</h5>
                                         </div>
                                     </div>
                                 </a>
