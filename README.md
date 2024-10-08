@@ -1,8 +1,8 @@
 # Portfolio: Summarize.com
 
-<img src="/static/img/Summary.png">
+<a href='http://mysummarize.com/'><img src="/static/img/Summary.png"></a>
 url:
-http://18.188.84.38
+http://mysummarize.com/
 
 ## <u>What this is.</u>
 Summarize.com is a Web application that generates cumulative and hierarchical summaries based on sequential summaries that you write.
